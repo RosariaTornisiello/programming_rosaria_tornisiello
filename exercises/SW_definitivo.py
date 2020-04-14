@@ -49,7 +49,7 @@ def align(s1,s2,pen,dic):
 	pipeAlign=[]
 	seqAlign2=[]
 	scores=[]
-	for l in range(len(maxList) - 1):
+	for l in range(len(maxList)):
 		score=maxList[l][0]
 		m=maxList[l][1]
 		n=maxList[l][2]
