@@ -31,7 +31,7 @@ def sw(s1, s2, PEN, matrix):
     """
     N = len(s1) + 1
     M = len(s2) + 1
-    F = []           #initialize scoring matrix(F) and traceback matrix(P)
+    F = []                   #initialize scoring matrix(F) and traceback matrix(P)
     P = []
     F = [[0] * (N) for i in range(M)]     # fill F and P with 0, defining
     P = [[0] * (N) for i in range(M)]     # their dimensions
@@ -40,17 +40,17 @@ def sw(s1, s2, PEN, matrix):
     for j in range(1, N):
         P[0][j] = 'l'
     for i in range(1, M):
-        for j in range(1, N):    # core of the function: for each i,j position
-            voc = {}             # the best score is added to F matrix,
-            up = F[i - 1][j] + PEN    # adding the gap penalty when necessary
-            left = F[i][j - 1] + PEN  # and its direction to P matrix
+        for j in range(1, N):             # core of the function: for each i,j position
+            voc = {}                      # the best score is added to F matrix,
+            up = F[i - 1][j] + PEN        # adding the gap penalty when necessary
+            left = F[i][j - 1] + PEN      # and its direction to P matrix
             diag = F[i - 1][j - 1] + int(matrix[s1[j - 1] + s2[i - 1]])
-            voc[up] = 'u'             # u = up, l = left, d = diagonal
+            voc[up] = 'u'                 # u = up, l = left, d = diagonal
             voc[left] = 'l'
             voc[diag] = 'd'
             max_score = max(up, left, diag)
-            if max_score < 0:         # all negative values are excluded and
-                F[i][j] = 0           # recorded as 0
+            if max_score < 0:             # all negative values are excluded and
+                F[i][j] = 0               # recorded as 0
             else:
                 F[i][j] = max_score
             P[i][j] = voc.get(max_score)
@@ -67,16 +67,16 @@ def align(s1, s2, F, P):
     value = 0
     massimo = 0
     max_list = []
-    for i in range(M, 1, -1):     # this doubly nested for loop finds the
-        for j in range(N, 1, -1): # maximum value(s) in F, memorizing it/them
-            value = F[i][j]       # and its/their indexes in a list of lists
+    for i in range(M, 1, -1):             # this doubly nested for loop finds the
+        for j in range(N, 1, -1):         # maximum value(s) in F, memorizing it/them
+            value = F[i][j]               # and its/their indexes in a list of lists
             if value > massimo:
                 massimo = value
                 max_list = []
                 max_list.append([value, i, j])
             elif value == massimo:
                 max_list.append([value, i, j])
-    sal1 = ''            # initialize empty strings for the aligned sequences
+    sal1 = ''                     # initialize empty strings for the aligned sequences
     sal2 = ''
     seq_align1 = []               # initialize 3 empy lists where to store the
     seq_align2 = []               # aligned sequence(s) and the score(s)
