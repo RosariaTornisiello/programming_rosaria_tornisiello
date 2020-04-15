@@ -45,8 +45,8 @@ def sw(s1, s2, PEN, matrix):
             up = F[i - 1][j] + PEN        # adding the gap penalty when necessary
             left = F[i][j - 1] + PEN      # and its direction to P matrix
             diag = F[i - 1][j - 1] + int(matrix[s1[j - 1] + s2[i - 1]])
-            voc[up] = 'u'                 # u = up, l = left, d = diagonal
-            voc[left] = 'l'
+            voc[up] = 'u'                 
+            voc[left] = 'l'               # u = up, l = left, d = diagonal
             voc[diag] = 'd'
             max_score = max(up, left, diag)
             if max_score < 0:             # all negative values are excluded and
